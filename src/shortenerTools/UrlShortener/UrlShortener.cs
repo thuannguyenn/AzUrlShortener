@@ -76,7 +76,7 @@ namespace Cloud5mins.Function
                 .AddEnvironmentVariables()
                 .Build();
 
-            if (!input.SecretKey.Equals(config["SecretKey"]))
+            if (string.IsNullOrWhiteSpace(input.SecretKey) || !input.SecretKey.Equals(config["SecretKey"]))
             {
                 return req.CreateResponse(HttpStatusCode.Unauthorized);
             }

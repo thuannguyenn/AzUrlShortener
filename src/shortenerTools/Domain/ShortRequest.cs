@@ -8,6 +8,6 @@ namespace Cloud5mins.domain
 
         public string Title { get; set; }
 
-        public string SecretKey { get; set; }
+        public string SecretKey { get; set; } = "";
     }
 }
