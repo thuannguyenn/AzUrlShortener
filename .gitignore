@@ -275,4 +275,3 @@ src/adminTools/adminBlazorWebsite/src/appsettings.Development.json
 
 #Igniore VSCode User Setting
 **/.vscode/settings.json
-output
