@@ -38,7 +38,7 @@ namespace Cloud5mins.Function
 
         [FunctionName("UrlShortener")]
         public static async Task<HttpResponseMessage> Run(
-        [HttpTrigger(AuthorizationLevel.Function, "get", "post", Route = null)]HttpRequestMessage req, 
+        [HttpTrigger(AuthorizationLevel.Anonymous, "get", "post", Route = null)]HttpRequestMessage req, 
         ILogger log, 
         ExecutionContext context)
         {
@@ -75,6 +75,11 @@ namespace Cloud5mins.Function
                 .AddJsonFile("local.settings.json", optional: true, reloadOnChange: true)
                 .AddEnvironmentVariables()
                 .Build();
+
+            if (!input.SecretKey.Equals(config["SecretKey"]))
+            {
+                return req.CreateResponse(HttpStatusCode.Unauthorized);
+            }
 
             StorageTableHelper stgHelper = new StorageTableHelper(config["UlsDataStorage"]); 
 
